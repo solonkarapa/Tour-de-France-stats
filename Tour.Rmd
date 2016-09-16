@@ -1,0 +1,117 @@
+---
+title: "The Tour De France"
+author: "Solon Karapanagiotis"
+date: "16 Sep 2016"
+output:
+  html_document:
+    highlight: haddock
+    toc: yes
+subtitle: Graphical Exploration using [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
+  and [ggvis](https://cran.r-project.org/web/packages/ggvis/index.html)
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data manipulation
+First stop: install and/or load relevant libraries  
+```{r, warning = F, message = F}
+library(dplyr)
+library(zoo)
+library(ggvis)
+```
+
+Data are obtained from [Tour De France Winners (Can Lance Win Six?)](http://www.amstat.org/publications/jse/datasets/tdf.txt) and updated until 2015. If interested contact me. 
+```{r, echo=F}
+TDF_Original <- read.csv("~/Documents/tour_project/TDF_Original1.csv")
+str(TDF_Original)
+```
+
+Second stop: There are a few dates that are seen as factors by R. Let's convert them to class "Dates" (there is more efficient way to do this but let's keep it simple). 
+
+```{r}
+TDF_Original$Start_Date <- as.Date(TDF_Original$Start_Date, format="%m/%d/%Y")
+TDF_Original$End_Date <- as.Date(TDF_Original$End_Date, format="%m/%d/%Y")
+TDF_Original$BirthDate <- as.Date(TDF_Original$BirthDate, format="%m/%d/%Y")
+```
+
+I use [`tbl_df()`](http://www.rdocumentation.org/packages/dplyr/functions/tbl_df) to convert my data frame to tbl. A data frame tbl wraps a local data frame. The main advantage to using a tbl_df over a regular data frame is the printing: tbl objects only print a few rows and all the columns that fit on one screen, describing the rest of it as text.
+
+```{r}
+tour_wrap <- tbl_df(TDF_Original)
+```
+
+```{r}
+tour_wrap
+```
+
+Third stop: constuct two new variables: `Age_Tenth` the age of each winner (to the first decimal) and `Continent`, the continent of the winner. 
+
+```{r}
+tour <- tour_wrap %>% mutate(Age_Tenth= as.yearmon(Start_Date)-as.yearmon(BirthDate)) # use "zoo" function as.yearmon()
+
+# create the "Continent"
+tour$Continent <- ifelse(tour$Country=="Australia","Australia",
+                         ifelse(tour$Country=="USA","America","Europe"
+                         ))
+```
+
+
+
+# Graphs
+The following plot shows the speed and distance for each year of the race. The colored dots represent the distance. The darker the shorter the race was. We see that the older tours were longer but slower than the later ones. As we would expect as the distance increases the speed decreases.
+
+```{r}
+tour %>% 
+  ggvis(~Year, ~Speed, fill = ~Distance) %>% 
+  layer_points() %>% 
+  scale_numeric("fill", range = c("green", "beige")) %>%
+  add_axis("x", title= "Year") %>%
+  add_axis("y", title= "Speed (km/h)") %>% 
+  add_legend("fill", title="Distance (km)")
+```
+
+It is easier to see if we go to lower dimensions. First graph: the speed increase with the year. Second graph: the distance decreases with the year.
+
+```{r}
+tour %>% 
+  ggvis(~Year, ~Speed) %>% 
+  layer_points(fill:="seagreen") %>%
+  add_axis("y", title= "Speed (km/h)", title_offset = 40) 
+
+tour %>% 
+  ggvis(~Year, ~Distance) %>% 
+  layer_points(fill:= "blueviolet") %>%
+  add_axis("y", title= "Distance (km)", title_offset = 50)
+```
+
+Let's investigate how many times the race started inside France. The majority is inside 49 vs 29. 
+
+```{r}
+#count(factor(tour$Inside_FR, labels = c("out", "in")))
+```
+
+But the frequency of starting outside France is higher the latest years.
+```{r}
+tour %>% 
+  ggvis(~Year, ~Speed, fill=~as.factor(Inside_FR)) %>% 
+  scale_nominal("fill", range=c("red", "steelblue")) %>%
+  layer_points() %>%
+  add_axis("y", title= "Speed (km/h)", title_offset = 40) %>%
+  add_legend("fill", title="Started inside France", values = c("NO","YES"))
+```
+
+Which country had the most successes?
+```{r}
+tour %>% 
+  ggvis(~Year, ~Speed, fill=~Country) %>%
+  scale_nominal("fill", range="category20") %>%
+  layer_points()
+```
+
+The plot does not help a lot. It is France of course!
+```{r}
+count(tour, Country)
+```
+
