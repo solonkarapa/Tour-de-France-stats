@@ -49,11 +49,11 @@ tour_wrap
 Third stop: constuct two new variables: `Age_Tenth` the age of each winner (to the first decimal) and `Continent`, the continent of the winner. 
 
 ```{r}
-tour <- tour_wrap %>% mutate(Age_Tenth= as.yearmon(Start_Date)-as.yearmon(BirthDate)) # use "zoo" function as.yearmon()
+tour <- tour_wrap %>% mutate(Age_Tenth = as.yearmon(Start_Date) - as.yearmon(BirthDate)) # use "zoo" function as.yearmon()
 
 # create the "Continent"
-tour$Continent <- ifelse(tour$Country=="Australia","Australia",
-                         ifelse(tour$Country=="USA","America","Europe"
+tour$Continent <- ifelse(tour$Country == "Australia", "Australia",
+                         ifelse(tour$Country == "USA", "America", "Europe"
                          ))
 ```
 
@@ -67,9 +67,9 @@ tour %>%
   ggvis(~Year, ~Speed, fill = ~Distance) %>% 
   layer_points() %>% 
   scale_numeric("fill", range = c("green", "beige")) %>%
-  add_axis("x", title= "Year") %>%
-  add_axis("y", title= "Speed (km/h)") %>% 
-  add_legend("fill", title="Distance (km)")
+  add_axis("x", title = "Year") %>%
+  add_axis("y", title = "Speed (km/h)") %>% 
+  add_legend("fill", title = "Distance (km)")
 ```
 
 It is easier to see if we go to lower dimensions. First graph: the speed increase with the year. Second graph: the distance decreases with the year.
@@ -77,13 +77,13 @@ It is easier to see if we go to lower dimensions. First graph: the speed increas
 ```{r}
 tour %>% 
   ggvis(~Year, ~Speed) %>% 
-  layer_points(fill:="seagreen") %>%
-  add_axis("y", title= "Speed (km/h)", title_offset = 40) 
+  layer_points(fill := "seagreen") %>%
+  add_axis("y", title = "Speed (km/h)", title_offset = 40) 
 
 tour %>% 
   ggvis(~Year, ~Distance) %>% 
-  layer_points(fill:= "blueviolet") %>%
-  add_axis("y", title= "Distance (km)", title_offset = 50)
+  layer_points(fill := "blueviolet") %>%
+  add_axis("y", title = "Distance (km)", title_offset = 50)
 ```
 
 Let's investigate how many times the race started inside France. The majority is inside 49 vs 29. 
@@ -95,18 +95,18 @@ Let's investigate how many times the race started inside France. The majority is
 But the frequency of starting outside France is higher the latest years.
 ```{r}
 tour %>% 
-  ggvis(~Year, ~Speed, fill=~as.factor(Inside_FR)) %>% 
-  scale_nominal("fill", range=c("red", "steelblue")) %>%
+  ggvis(~Year, ~Speed, fill = ~as.factor(Inside_FR)) %>% 
+  scale_nominal("fill", range = c("red", "steelblue")) %>%
   layer_points() %>%
-  add_axis("y", title= "Speed (km/h)", title_offset = 40) %>%
-  add_legend("fill", title="Started inside France", values = c("NO","YES"))
+  add_axis("y", title = "Speed (km/h)", title_offset = 40) %>%
+  add_legend("fill", title = "Started inside France", values = c("NO","YES"))
 ```
 
 Which country had the most successes?
 ```{r}
 tour %>% 
-  ggvis(~Year, ~Speed, fill=~Country) %>%
-  scale_nominal("fill", range="category20") %>%
+  ggvis(~Year, ~Speed, fill = ~Country) %>%
+  scale_nominal("fill", range = "category20") %>%
   layer_points()
 ```
 

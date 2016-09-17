@@ -209,11 +209,11 @@ TDF_Original$BirthDate &lt;-<span class="st"> </span><span class="kw">as.Date</s
 ## Variables not shown: Winner (fctr), Country (fctr), BirthDate (date),
 ##   Age_Year (int), Age_Tenth (dbl), Inside_FR (int)</code></pre>
 <p>Third stop: constuct two new variables: <code>Age_Tenth</code> the age of each winner (to the first decimal) and <code>Continent</code>, the continent of the winner.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour &lt;-<span class="st"> </span>tour_wrap %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Age_Tenth=</span> <span class="kw">as.yearmon</span>(Start_Date)-<span class="kw">as.yearmon</span>(BirthDate)) <span class="co"># use &quot;zoo&quot; function as.yearmon()</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour &lt;-<span class="st"> </span>tour_wrap %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Age_Tenth =</span> <span class="kw">as.yearmon</span>(Start_Date) -<span class="st"> </span><span class="kw">as.yearmon</span>(BirthDate)) <span class="co"># use &quot;zoo&quot; function as.yearmon()</span>
 
 <span class="co"># create the &quot;Continent&quot;</span>
-tour$Continent &lt;-<span class="st"> </span><span class="kw">ifelse</span>(tour$Country==<span class="st">&quot;Australia&quot;</span>,<span class="st">&quot;Australia&quot;</span>,
-                         <span class="kw">ifelse</span>(tour$Country==<span class="st">&quot;USA&quot;</span>,<span class="st">&quot;America&quot;</span>,<span class="st">&quot;Europe&quot;</span>
+tour$Continent &lt;-<span class="st"> </span><span class="kw">ifelse</span>(tour$Country ==<span class="st"> &quot;Australia&quot;</span>, <span class="st">&quot;Australia&quot;</span>,
+                         <span class="kw">ifelse</span>(tour$Country ==<span class="st"> &quot;USA&quot;</span>, <span class="st">&quot;America&quot;</span>, <span class="st">&quot;Europe&quot;</span>
                          ))</code></pre></div>
 </div>
 <div id="graphs" class="section level1">
@@ -223,30 +223,30 @@ tour$Continent &lt;-<span class="st"> </span><span class="kw">ifelse</span>(tour
 <span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed, <span class="dt">fill =</span> ~Distance) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">layer_points</span>() %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_numeric</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">range =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;beige&quot;</span>)) %&gt;%
-<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">title=</span> <span class="st">&quot;Year&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title=</span> <span class="st">&quot;Speed (km/h)&quot;</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">add_legend</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Distance (km)&quot;</span>)</code></pre></div>
-<div id="plot_id648708031-container" class="ggvis-output-container">
-<div id="plot_id648708031" class="ggvis-output"></div>
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Year&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Speed (km/h)&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">add_legend</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Distance (km)&quot;</span>)</code></pre></div>
+<div id="plot_id605022802-container" class="ggvis-output-container">
+<div id="plot_id605022802" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id648708031_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id648708031" data-renderer="svg">SVG</a>
+<a id="plot_id605022802_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id605022802" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id648708031_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id648708031" data-renderer="canvas">Canvas</a>
+<a id="plot_id605022802_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id605022802" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id648708031_download" class="ggvis-download" data-plot-id="plot_id648708031">Download</a>
+<a id="plot_id605022802_download" class="ggvis-download" data-plot-id="plot_id605022802">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id648708031_spec = {
+var plot_id605022802_spec = {
   "data": [
     {
       "name": ".0",
@@ -396,34 +396,34 @@ var plot_id648708031_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id648708031").parseSpec(plot_id648708031_spec);
+ggvis.getPlot("plot_id605022802").parseSpec(plot_id605022802_spec);
 </script>
 <p>It is easier to see if we go to lower dimensions. First graph: the speed increase with the year. Second graph: the distance decreases with the year.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">layer_points</span>(fill:<span class="er">=</span><span class="st">&quot;seagreen&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title=</span> <span class="st">&quot;Speed (km/h)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">40</span>) </code></pre></div>
-<div id="plot_id167271080-container" class="ggvis-output-container">
-<div id="plot_id167271080" class="ggvis-output"></div>
+<span class="st">  </span><span class="kw">layer_points</span>(fill :<span class="er">=</span><span class="st"> &quot;seagreen&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Speed (km/h)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">40</span>) </code></pre></div>
+<div id="plot_id641523571-container" class="ggvis-output-container">
+<div id="plot_id641523571" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id167271080_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id167271080" data-renderer="svg">SVG</a>
+<a id="plot_id641523571_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id641523571" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id167271080_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id167271080" data-renderer="canvas">Canvas</a>
+<a id="plot_id641523571_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id641523571" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id167271080_download" class="ggvis-download" data-plot-id="plot_id167271080">Download</a>
+<a id="plot_id641523571_download" class="ggvis-download" data-plot-id="plot_id641523571">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id167271080_spec = {
+var plot_id641523571_spec = {
   "data": [
     {
       "name": ".0",
@@ -545,33 +545,33 @@ var plot_id167271080_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id167271080").parseSpec(plot_id167271080_spec);
+ggvis.getPlot("plot_id641523571").parseSpec(plot_id641523571_spec);
 </script>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Distance) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">layer_points</span>(fill:<span class="er">=</span><span class="st"> &quot;blueviolet&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title=</span> <span class="st">&quot;Distance (km)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">50</span>)</code></pre></div>
-<div id="plot_id352621746-container" class="ggvis-output-container">
-<div id="plot_id352621746" class="ggvis-output"></div>
+<span class="st">  </span><span class="kw">layer_points</span>(fill :<span class="er">=</span><span class="st"> &quot;blueviolet&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Distance (km)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">50</span>)</code></pre></div>
+<div id="plot_id806776858-container" class="ggvis-output-container">
+<div id="plot_id806776858" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id352621746_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id352621746" data-renderer="svg">SVG</a>
+<a id="plot_id806776858_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id806776858" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id352621746_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id352621746" data-renderer="canvas">Canvas</a>
+<a id="plot_id806776858_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id806776858" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id352621746_download" class="ggvis-download" data-plot-id="plot_id352621746">Download</a>
+<a id="plot_id806776858_download" class="ggvis-download" data-plot-id="plot_id806776858">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id352621746_spec = {
+var plot_id806776858_spec = {
   "data": [
     {
       "name": ".0",
@@ -693,38 +693,38 @@ var plot_id352621746_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id352621746").parseSpec(plot_id352621746_spec);
+ggvis.getPlot("plot_id806776858").parseSpec(plot_id806776858_spec);
 </script>
 <p>Let’s investigate how many times the race started inside France. The majority is inside 49 vs 29.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#count(factor(tour$Inside_FR, labels = c(&quot;out&quot;, &quot;in&quot;)))</span></code></pre></div>
 <p>But the frequency of starting outside France is higher the latest years.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed, <span class="dt">fill=</span>~<span class="kw">as.factor</span>(Inside_FR)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_nominal</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">range=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;steelblue&quot;</span>)) %&gt;%
+<span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed, <span class="dt">fill =</span> ~<span class="kw">as.factor</span>(Inside_FR)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_nominal</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">range =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;steelblue&quot;</span>)) %&gt;%
 <span class="st">  </span><span class="kw">layer_points</span>() %&gt;%
-<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title=</span> <span class="st">&quot;Speed (km/h)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">40</span>) %&gt;%
-<span class="st">  </span><span class="kw">add_legend</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Started inside France&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;NO&quot;</span>,<span class="st">&quot;YES&quot;</span>))</code></pre></div>
-<div id="plot_id704871614-container" class="ggvis-output-container">
-<div id="plot_id704871614" class="ggvis-output"></div>
+<span class="st">  </span><span class="kw">add_axis</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Speed (km/h)&quot;</span>, <span class="dt">title_offset =</span> <span class="dv">40</span>) %&gt;%
+<span class="st">  </span><span class="kw">add_legend</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Started inside France&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;NO&quot;</span>,<span class="st">&quot;YES&quot;</span>))</code></pre></div>
+<div id="plot_id805350846-container" class="ggvis-output-container">
+<div id="plot_id805350846" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id704871614_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id704871614" data-renderer="svg">SVG</a>
+<a id="plot_id805350846_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id805350846" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id704871614_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id704871614" data-renderer="canvas">Canvas</a>
+<a id="plot_id805350846_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id805350846" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id704871614_download" class="ggvis-download" data-plot-id="plot_id704871614">Download</a>
+<a id="plot_id805350846_download" class="ggvis-download" data-plot-id="plot_id805350846">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id704871614_spec = {
+var plot_id805350846_spec = {
   "data": [
     {
       "name": ".0",
@@ -873,34 +873,34 @@ var plot_id704871614_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id704871614").parseSpec(plot_id704871614_spec);
+ggvis.getPlot("plot_id805350846").parseSpec(plot_id805350846_spec);
 </script>
 <p>Which country had the most successes?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tour %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed, <span class="dt">fill=</span>~Country) %&gt;%
-<span class="st">  </span><span class="kw">scale_nominal</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">range=</span><span class="st">&quot;category20&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggvis</span>(~Year, ~Speed, <span class="dt">fill =</span> ~Country) %&gt;%
+<span class="st">  </span><span class="kw">scale_nominal</span>(<span class="st">&quot;fill&quot;</span>, <span class="dt">range =</span> <span class="st">&quot;category20&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">layer_points</span>()</code></pre></div>
-<div id="plot_id845080072-container" class="ggvis-output-container">
-<div id="plot_id845080072" class="ggvis-output"></div>
+<div id="plot_id801229965-container" class="ggvis-output-container">
+<div id="plot_id801229965" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id845080072_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id845080072" data-renderer="svg">SVG</a>
+<a id="plot_id801229965_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id801229965" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id845080072_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id845080072" data-renderer="canvas">Canvas</a>
+<a id="plot_id801229965_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id801229965" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id845080072_download" class="ggvis-download" data-plot-id="plot_id845080072">Download</a>
+<a id="plot_id801229965_download" class="ggvis-download" data-plot-id="plot_id801229965">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id845080072_spec = {
+var plot_id801229965_spec = {
   "data": [
     {
       "name": ".0",
@@ -1047,7 +1047,7 @@ var plot_id845080072_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id845080072").parseSpec(plot_id845080072_spec);
+ggvis.getPlot("plot_id801229965").parseSpec(plot_id801229965_spec);
 </script>
 <p>The plot does not help a lot. It is France of course!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">count</span>(tour, Country)</code></pre></div>
